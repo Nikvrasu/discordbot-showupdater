@@ -1,0 +1,125 @@
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg, #0a0a0a);
+  color: var(--text, #f0f0f0);
+  font-family: system-ui, sans-serif;
+}
+
+.auth-nav {
+  padding: 1.25rem 2.5rem;
+  border-bottom: 1px solid var(--border, #222);
+}
+
+.nav-logo {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  color: var(--text, #f0f0f0);
+  text-decoration: none;
+}
+
+.auth-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface, #141414);
+  border: 1px solid var(--border, #222);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.auth-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border, #222);
+}
+
+.auth-tab {
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--muted, #888);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.auth-tab:hover {
+  color: var(--text, #f0f0f0);
+}
+
+.auth-tab.active {
+  color: var(--text, #f0f0f0);
+  border-bottom: 2px solid var(--accent, #e5383b);
+  margin-bottom: -1px;
+}
+
+.auth-form {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field label {
+  font-size: 0.8rem;
+  color: var(--muted, #888);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.field input {
+  background: var(--bg, #0a0a0a);
+  border: 1px solid var(--border, #222);
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  color: var(--text, #f0f0f0);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.field input::placeholder {
+  color: #444;
+}
+
+.field input:focus {
+  border-color: #444;
+}
+
+.auth-error {
+  font-size: 0.85rem;
+  color: var(--accent, #e5383b);
+  margin: 0;
+}
+
+.auth-submit {
+  margin-top: 0.25rem;
+  padding: 0.75rem;
+  background: var(--accent, #e5383b);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.auth-submit:hover {
+  background: #ff4d50;
+}
