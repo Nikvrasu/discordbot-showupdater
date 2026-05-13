@@ -19,6 +19,10 @@ async def register_user(user: UserCreate, db: Session = Depends(get_db)):
     if existing_user:
         raise HTTPException(status_code=400, detail="User with that email already exists")
 
+    existing_username = db.query(User).filter(User.username == user.username).first()
+    if existing_username:
+        raise HTTPException(status_code=400, detail="Username already exists")
+
     hashed_password = crypt_context.hash(user.password)
     new_user = User(username=user.username, email=user.email, password_hash=hashed_password)
     db.add(new_user)

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './Auth.css'
 
-function Auth() {
-  const [mode, setMode] = useState('login')
+function Auth({ initialMode = 'login' }) {
+  const [mode, setMode] = useState(initialMode)
   const [form, setForm] = useState({ username: '', email: '', password: '', confirm: '' })
   const [error, setError] = useState('')
 
@@ -11,12 +11,28 @@ function Auth() {
     setError('')
   }
 
+  const getErrorMessage = (detail) => {
+    if (typeof detail === 'string') return detail
+    if (Array.isArray(detail)) {
+      return detail.map(err => {
+        const loc = err.loc?.slice(1).join(' ') || 'field'
+        return `${loc}: ${err.msg}`
+      }).join('; ')
+    }
+    return 'Something went wrong.'
+  }
+
+  const clearForm = () => {
+    setForm({ username: '', email: '', password: '', confirm: '' })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError('')
 
     if (mode === 'register' && form.password !== form.confirm) {
       setError('Passwords do not match.')
+      clearForm()
       return
     }
 
@@ -35,7 +51,8 @@ function Auth() {
       const data = await res.json()
 
       if (!res.ok) {
-        setError(data.detail || 'Something went wrong.')
+        setError(getErrorMessage(data.detail))
+        clearForm()
         return
       }
 
@@ -44,10 +61,11 @@ function Auth() {
         window.location.href = '/dashboard'
       } else {
         setMode('login')
-        setForm({ username: '', email: '', password: '', confirm: '' })
+        clearForm()
       }
     } catch {
       setError('Could not connect to server.')
+      clearForm()
     }
   }
 
