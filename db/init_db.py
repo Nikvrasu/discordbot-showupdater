@@ -1,5 +1,5 @@
 from db.database import Base, engine
-from api.models import user
+from api.models import user, show, user_show
 
 def init_db():
     Base.metadata.create_all(bind=engine)

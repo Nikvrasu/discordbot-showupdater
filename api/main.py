@@ -5,6 +5,7 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import IntegrityError
 from api.routes.auth import router as auth_router
 from api.routes.users import router as users_router
+from api.routes.shows import router as shows_router
 
 app = FastAPI()
 
@@ -18,6 +19,7 @@ app.add_middleware(
 
 app.include_router(auth_router)
 app.include_router(users_router)
+app.include_router(shows_router)
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(request: Request, exc: RequestValidationError):

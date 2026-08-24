@@ -1,6 +1,6 @@
-from tokenize import String
+from sqlalchemy import Column, Integer, String
 
-from sqlalchemy import Column, Integer
+from sqlalchemy.orm import relationship
 
 from db.database import Base
 
@@ -15,6 +15,8 @@ class Show(Base):
     description = Column(String, nullable=True)
     release_year = Column(Integer, nullable=True)
     external_id = Column(String, unique=True, index=True, nullable=True)
+    
+    users = relationship("User", secondary="user_shows", back_populates="shows")
 
     def __repr__(self):
         return f"<Show(id={self.id}, title='{self.title}', release_year={self.release_year})>"
